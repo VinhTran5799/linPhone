@@ -1,0 +1,29 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "https://www.jitpack.io"
+        } // for com.github.chrisbanes:PhotoView
+        maven {
+            url "https://mvnrepository.com/artifact/org.pcap4j/pcap4j-packetfactory-static"
+        }
+        maven {
+            url "https://mvnrepository.com/artifact/org.pcap4j/pcap4j-core"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.6'
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
