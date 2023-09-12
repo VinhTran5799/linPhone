@@ -80,6 +80,7 @@
                     linphone:listener="@{viewModel.enableCellularListener}"
                     linphone:icon="@{@drawable/settings_mpxp_cellular}"
                     linphone:title="@{@string/mpxp_settings_cellular_title}"/>
+
                 <TextView
                     android:text="Received Packets:"
                     android:textStyle="bold"

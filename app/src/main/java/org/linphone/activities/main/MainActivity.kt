@@ -44,6 +44,9 @@ import androidx.navigation.findNavController
 import androidx.window.layout.FoldingFeature
 import coil.imageLoader
 import com.google.android.material.snackbar.Snackbar
+import java.io.UnsupportedEncodingException
+import java.lang.Math.abs
+import java.net.URLDecoder
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -81,10 +84,6 @@ import org.linphone.utils.PermissionHelper
 import org.linphone.utils.ShortcutsHelper
 import org.linphone.utils.hideKeyboard
 import org.linphone.utils.setKeyboardInsetListener
-import java.io.UnsupportedEncodingException
-import java.lang.Math.abs
-import java.net.URLDecoder
-
 
 class MainActivity : GenericActivity(), SnackBarActivity, NavController.OnDestinationChangedListener {
     private lateinit var binding: MainActivityBinding
@@ -110,7 +109,6 @@ class MainActivity : GenericActivity(), SnackBarActivity, NavController.OnDestin
     private var initPosX = 0f
     private var initPosY = 0f
     private var overlay: View? = null
-    var mCapThread: CaptureThread? = null
     var mCaptureRunning = false
 
     private val componentCallbacks = object : ComponentCallbacks2 {
@@ -130,7 +128,6 @@ class MainActivity : GenericActivity(), SnackBarActivity, NavController.OnDestin
         bundle.putBoolean("capture_running", mCaptureRunning)
         super.onSaveInstanceState(bundle)
     }
-
 
     override fun onLayoutChanges(foldingFeature: FoldingFeature?) {
         sharedViewModel.layoutChangedEvent.value = Event(true)
@@ -160,7 +157,9 @@ class MainActivity : GenericActivity(), SnackBarActivity, NavController.OnDestin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//        val intent = Intent(this, MpxpMainActivity::class.java)
+//        intent.putExtra("key", "a")
+//        startActivity(intent)
         // Must be done before the setContentView
         installSplashScreen()
 

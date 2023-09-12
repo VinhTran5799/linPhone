@@ -1,16 +1,16 @@
- package org.linphone.activities.main
+package com.emanuelef.pcap_receiver
 
- import android.util.Log
- import org.linphone.activities.main.settings.fragments.MpxpSettingsFragment
- import org.pcap4j.packet.IllegalRawDataException
- import org.pcap4j.packet.IpV4Packet
- import java.io.IOException
- import java.net.DatagramPacket
- import java.net.DatagramSocket
- import java.net.SocketException
- import java.nio.ByteBuffer
+import android.util.Log
+import java.io.IOException
+import java.net.DatagramPacket
+import java.net.DatagramSocket
+import java.net.SocketException
+import java.nio.ByteBuffer
+import org.linphone.activities.main.settings.fragments.MpxpMainActivity
+import org.pcap4j.packet.IllegalRawDataException
+import org.pcap4j.packet.IpV4Packet
 
- class CaptureThread(val mActivity: MpxpSettingsFragment) : Thread() {
+class CaptureThread(val mActivity: MpxpMainActivity) : Thread() {
     private var mSocket: DatagramSocket? = null
     override fun run() {
         try {
@@ -49,8 +49,10 @@
                 }
             }
         } catch (e: IOException) {
-            if (e !is SocketException) // raised when capture is stopped
+            if (e !is SocketException) {
+                // raised when capture is stopped
                 e.printStackTrace()
+            }
         }
     }
 
@@ -72,11 +74,13 @@
             val data = ByteArray(len / 2)
             var i = 0
             while (i < len) {
-                data[i / 2] = ((s[i].digitToIntOrNull(16) ?: -1 shl 4)
-                + s[i + 1].digitToIntOrNull(16)!! ?: -1).toByte()
+                data[i / 2] = (
+                    (s[i].digitToIntOrNull(16) ?: -1 shl 4) +
+                        s[i + 1].digitToIntOrNull(16)!! ?: -1
+                    ).toByte()
                 i += 2
             }
             return data
         }
     }
- }
+}

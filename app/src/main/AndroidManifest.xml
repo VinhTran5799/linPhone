@@ -62,6 +62,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".LinphoneApplication"
@@ -149,7 +150,15 @@
                 <data android:scheme="mmsto" />
             </intent-filter>
         </activity>
+<!--        <activity-->
+<!--            android:name=".activities.main.settings.fragments.MpxpMainActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name=".activities.assistant.AssistantActivity"
             android:windowSoftInputMode="adjustResize"/>
 
@@ -243,6 +252,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.emanuelef.pcap_receiver.MyBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.emanuelef.remote_capture.CaptureStatus" />
             </intent-filter>
         </receiver>
 
